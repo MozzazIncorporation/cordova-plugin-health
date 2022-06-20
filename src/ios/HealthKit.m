@@ -1,6 +1,7 @@
 #import "HealthKit.h"
 #import "HKHealthStore+AAPLExtensions.h"
 #import "WorkoutActivityConversion.h"
+#import <HKProcess/DataLogging.h>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCNotLocalizedStringInspection"
@@ -1265,11 +1266,14 @@ static NSString *const HKPluginKeyUUID = @"UUID";
                                                   // Until then use querySampleType({limit=1, ascending="T", endDate=new Date()}) to return the last result
 
                                                   // Issue #47: commented this block since it resulted in callbacks not being delivered while the app was in the background
-                                                  //dispatch_sync(dispatch_get_main_queue(), ^{
-                                                  CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:sampleTypeString];
-                                                  [result setKeepCallbackAsBool:YES];
-                                                  [bSelf.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-                                                  //});
+                                                  dispatch_sync(dispatch_get_main_queue(), ^{
+                                                    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:sampleTypeString];
+
+                                                    [DataLogging logData:result];
+
+                                                    [result setKeepCallbackAsBool:YES];
+                                                    [bSelf.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+                                                  });
                                               }
                                           }];
 

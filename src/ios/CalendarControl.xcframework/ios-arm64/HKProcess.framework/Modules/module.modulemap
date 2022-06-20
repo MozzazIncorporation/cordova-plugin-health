@@ -1,0 +1,6 @@
+framework module HKProcess {
+  umbrella header "HKProcess.h"
+
+  export *
+  module * { export * }
+}
