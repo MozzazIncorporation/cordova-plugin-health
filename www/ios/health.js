@@ -51,6 +51,7 @@ dataTypes['resp_rate'] = 'HKQuantityTypeIdentifierRespiratoryRate';
 dataTypes['oxygen_saturation'] = 'HKQuantityTypeIdentifierOxygenSaturation';
 dataTypes['vo2max'] = 'HKQuantityTypeIdentifierVO2Max';
 dataTypes['temperature'] = 'HKQuantityTypeIdentifierBodyTemperature';
+dataTypes['6MWT'] = 'HKQuantityTypeIdentifierSixMinuteWalkTestDistance';
 
 // for parseable units in HK, see https://developer.apple.com/documentation/healthkit/hkunit/1615733-unitfromstring?language=objc
 var units = [];
@@ -96,6 +97,7 @@ units['resp_rate'] = 'count/min';
 units['oxygen_saturation'] = '%';
 units['vo2max'] = 'ml/(kg*min)';
 units['temperature'] = 'degC';
+units['6MWT'] = 'length';
 
 // just a wrapper for querying Telerik's if HK is available
 Health.prototype.isAvailable = function (success, error) {
