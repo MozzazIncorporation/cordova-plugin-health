@@ -1393,7 +1393,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
                                                                                   measurementStartDate = nil;
                                                                               }
                                                                           } else {
-                                                                              estimateStartDate = nil;
+                                                                              measurementStartDate = nil;
                                                                           }
                                                                           
                                                                           NSDate *startSample = sample.startDate;
