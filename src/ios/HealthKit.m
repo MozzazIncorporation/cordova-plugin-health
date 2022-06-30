@@ -11,6 +11,7 @@ static NSString *const HKPluginError = @"HKPluginError";
 static NSString *const HKPluginKeyReadTypes = @"readTypes";
 static NSString *const HKPluginKeyWriteTypes = @"writeTypes";
 static NSString *const HKPluginKeyType = @"type";
+static NSString *const HKPluginKeyMeasurementStartDate = @"measurementStartDate";
 static NSString *const HKPluginKeyStartDate = @"startDate";
 static NSString *const HKPluginKeyEndDate = @"endDate";
 static NSString *const HKPluginKeySampleType = @"sampleType";
@@ -1384,12 +1385,23 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
                                                                       for (HKSample *sample in results) {
 
+                                                                          NSDate *measurementStartDate;
+                                                                          if (@available(iOS 15.0, *)) {
+                                                                              if(sample.metadata[HKMetadataKeyDateOfEarliestDataUsedForEstimate]){
+                                                                                  measurementStartDate = sample.metadata[HKMetadataKeyDateOfEarliestDataUsedForEstimate];
+                                                                              }else{
+                                                                                  measurementStartDate = nil;
+                                                                              }
+                                                                          } else {
+                                                                              estimateStartDate = nil;
+                                                                          }
+                                                                          
                                                                           NSDate *startSample = sample.startDate;
                                                                           NSDate *endSample = sample.endDate;
                                                                           NSMutableDictionary *entry = [NSMutableDictionary dictionary];
 
                                                                           // common indices
-                                                                          entry[HKPluginKeyStartDate] =[HealthKit stringFromDate:startSample];
+                                                                          entry[HKPluginKeyMeasurementStartDate] =[HealthKit stringFromDate:measurementStartDate];
                                                                           entry[HKPluginKeyEndDate] = [HealthKit stringFromDate:endSample];
                                                                           entry[HKPluginKeyUUID] = sample.UUID.UUIDString;
 

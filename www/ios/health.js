@@ -321,6 +321,8 @@ Health.prototype.query = function (opts, onSuccess, onError) {
               else res.value.reason = 'bolus'
             }
             if (samples[i].metadata && samples[i].metadata.HKMetadataKeyInsulinDeliveryReason) res.value.reason = samples[i].metadata.HKMetadataKeyInsulinDeliveryReason; // overwrite HKInsulinDeliveryReason
+          } else if (opts.dataType === '6MWT') {
+            res.measurementStartDate = samples[i].measurementStartDate;
           } else {
             res.value = samples[i].quantity;
           }
