@@ -1402,6 +1402,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
                                                                           // common indices
                                                                           entry[HKPluginKeyMeasurementStartDate] =[HealthKit stringFromDate:measurementStartDate];
+                                                                          entry[HKPluginKeyStartDate] = [HealthKit stringFromDate:startSample];
                                                                           entry[HKPluginKeyEndDate] = [HealthKit stringFromDate:endSample];
                                                                           entry[HKPluginKeyUUID] = sample.UUID.UUIDString;
 
