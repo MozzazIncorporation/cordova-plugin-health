@@ -321,9 +321,10 @@ Health.prototype.query = function (opts, onSuccess, onError) {
               else res.value.reason = 'bolus'
             }
             if (samples[i].metadata && samples[i].metadata.HKMetadataKeyInsulinDeliveryReason) res.value.reason = samples[i].metadata.HKMetadataKeyInsulinDeliveryReason; // overwrite HKInsulinDeliveryReason
-          } else if (opts.dataType === '6MWT') {
-            res.measurementStartDate = samples[i].measurementStartDate;
           } else {
+            if (opts.dataType === '6MWT' && samples[i].measurementStartDate) {
+              res.measurementStartDate = samples[i].measurementStartDate;
+            }
             res.value = samples[i].quantity;
           }
           if (samples[i].unit) res.unit = samples[i].unit;
