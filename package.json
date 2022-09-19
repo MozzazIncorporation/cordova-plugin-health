@@ -17,14 +17,12 @@
   "issue": "https://github.com/dariosalvi78/cordova-plugin-health/issues",
   "keywords": [
     "HealthKit",
-    "Google Fit",
     "health",
     "fitness",
     "ecosystem:cordova"
   ],
   "platforms": [
-    "ios",
-    "android"
+    "ios"
   ],
   "engines": [
     {
